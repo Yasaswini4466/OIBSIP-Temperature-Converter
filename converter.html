@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Temperature Converter</title>
+        <link rel="stylesheet" href="converter.css">
+    </head>
+    <body>
+         <div class="container">
+            <h1>Temperature Converter</h1>
+            <input type="number" id="input" placeholder="Enter Temperature">
+            <br>
+            <select id="units">
+                <option value="celsius">Celsius</option>
+                <option value="fahrenheit">Fahrenheit</option>
+                <option value="kelvin">Kelvin</option>
+            </select>
+            <br>
+            <button id="button">Convert</button>
+            <br>
+            <div id="result"></div>
+         </div>
+         <script>
+            document.getElementById('button').addEventListener('click',function(){
+                const tempinput = document.getElementById('input').value;
+                const unit = document.getElementById('units').value;
+                const restemp=document.getElementById('result');
+                if(isNaN(tempinput) || tempinput.trim()===" "){
+                    restemp.textContent="Please enter a number.";
+                    return;
+                }
+                const temperature=parseFloat(tempinput);
+                let result=" ";
+                if(unit==='celsius'){
+                    const fahrenheit= (temperature*9/5)+32;
+                    const kelvin=temperature+273.15;
+                    result="Result: "+ temperature+" Celsius = "+fahrenheit.toFixed(3)+" Fahrenheit and "+kelvin.toFixed(3)+" Kelvin";
+                }
+                else if(unit==='fahrenheit'){
+                    const celsius= (temperature-32)*5/9;
+                    const kelvin= ((temperature-32) *5/9) +273.15;
+                    result="Result: "+temperature+" Fahrenheit = "+celsius.toFixed(3)+" Celsius and "+kelvin.toFixed(3)+" Kelvin";
+                }
+                else if(unit==='kelvin'){    
+                    const celsius= temperature-273.15;
+                    const fahrenheit= (temperature-273.15)*9/5+32;
+                    result="Result: "+ temperature+" Kelvin = "+celsius.toFixed(3)+" Celsius and "+kelvin.toFixed(3)+" Kelvin";
+                }
+                restemp.textContent=result;
+            })
+         </script>
+    </body>
+</html>
